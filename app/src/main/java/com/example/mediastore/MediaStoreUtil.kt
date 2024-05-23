@@ -219,4 +219,17 @@ class MediaStoreUtil(
         }
     }
 
+    fun getRawAudioFile(resourceId : Int) : File{
+        val inputStream = context.resources.openRawResource(resourceId)
+
+        val audioFile = File.createTempFile(
+            "temp_audio",".mp3",context.cacheDir
+        )
+        audioFile.outputStream().use {outputStream ->
+            inputStream.copyTo(outputStream)
+
+        }
+        return audioFile
+    }
+
 }
